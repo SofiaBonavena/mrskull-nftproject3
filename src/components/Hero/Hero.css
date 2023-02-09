@@ -1,0 +1,48 @@
+.hero.is-info {
+    width: 100%;
+    background-image: url('/src/assets/hero2.jpg'); background-position: center;
+    background-color: #ffffff00;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+    
+
+.hero-body {
+    text-align: center!important; 
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+} 
+
+
+.subtitle {
+    font-family: montserrat;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #48c753;
+}
+
+@media only screen and (max-width: 769px) {
+    .hero.is-info .title {
+        /* font-family:'Shrikhand'; */
+        font-family: 'Pirata One';
+        font-size: 60px;
+        letter-spacing: 5px;
+        color: white;
+        margin-top: 25%;
+    }
+    
+}
+
+@media only screen and (min-width: 769px) {
+    .hero.is-info .title {
+        font-family: 'Pirata One';
+        font-size: 80px;
+        letter-spacing: 5px;
+        color: white;
+    }
+
+}

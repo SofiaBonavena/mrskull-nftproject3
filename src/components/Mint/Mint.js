@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import Web3 from 'web3';
+import React, { useState, useEffect } from "react";
+import "bulma/css/bulma.min.css";
+import "../Mint/Mint.css";
+import Web3 from "web3";
 import {
   useAddress,
   useWalletProvider,
   useBalance,
-} from '../../contexts/OnboardContext';
-import { factoryAddress, factoryAbi } from '../../services/onboard/contract';
-
+} from "../../contexts/OnboardContext";
+import { factoryAddress, factoryAbi } from "../../services/onboard/contract";
 const Mint = () => {
   const address = useAddress();
   const balance = useBalance();
   const provider = useWalletProvider();
   const web3 = new Web3(provider);
-
+  const [total, setTotal] = useState(0);
   const [userBalance, setUserBalance] = useState(0);
   const [tokenPrice, setTokenPrice] = useState(0);
-  const [mintStatus, setMintStatus] = useState(`Waiting`);
+  const [mintStatus, setMintStatus] = useState("Waiting");
+  const [message, setMessage] = useState("Waiting...");
+
+  const [counter, setCounter] = useState(1);
+  const handleIncrement = () => {
+    setCounter(counter + 1);
+  };
+
+  const handleDecrement = () => {
+    if (counter > 1) {
+      setCounter(counter - 1);
+    }
+  };
 
   useEffect(() => {
     if (address) {
       if (balance) {
-        const valueEth = web3.utils.fromWei(`${balance}`, 'ether');
+        const valueEth = web3.utils.fromWei(`${balance}`, "ether");
         const totalFixed = parseFloat(valueEth).toFixed(4);
         setUserBalance(totalFixed);
       }
@@ -32,6 +45,7 @@ const Mint = () => {
   useEffect(() => {
     const getPrice = async () => {
       const myContract = new web3.eth.Contract(factoryAbi, factoryAddress);
+      console.log(myContract);
       const price = await myContract.methods
         .monsterPrice()
         .call()
@@ -39,15 +53,35 @@ const Mint = () => {
           return false;
         });
 
-      const valueEth = web3.utils.fromWei(`${price || 0}`, 'ether');
-
+      const valueEth = web3.utils.fromWei(`${price || 0}`, "ether");
+      console.log(price, valueEth);
       setTokenPrice(valueEth);
     };
     getPrice();
   });
 
+  useEffect(() => {
+    setTotal(counter * tokenPrice);
+    console.log(counter, tokenPrice, total);
+  }, [counter, tokenPrice, total]);
+
+  useEffect(() => {
+    if (mintStatus === "waiting") {
+      setMessage("Waiting");
+    }
+    if (mintStatus === "userConfirmed") {
+      setMessage("Waiting for blockchain confirmation");
+    }
+    if (mintStatus === "blockchainConfirmed") {
+      setMessage("Succesful! ");
+    }
+    if (mintStatus === "error") {
+      setMessage("Transaction error ");
+    }
+  }, [mintStatus]);
+
   const handleMint = async () => {
-    console.log('MINT!');
+    console.log("MINT!");
     try {
       const myContract = new web3.eth.Contract(factoryAbi, factoryAddress);
 
@@ -74,62 +108,74 @@ const Mint = () => {
 
       setTokenPrice(price);
 
-      console.log('Sale Started', saleStarted);
-      console.log('Sale Started', publicSaleStarted);
-      console.log('Price', price);
-
-      const count = 1;
+      console.log("Sale Started", saleStarted);
+      console.log("Sale Started", publicSaleStarted);
+      console.log("Price", price);
 
       const mintParams = {
-        proof: ['0x0000000000000000000000000000000000000000'],
-        leaf: '0x0000000000000000000000000000000000000000',
-        count,
+        proof: ["0x0000000000000000000000000000000000000000"],
+        leaf: "0x0000000000000000000000000000000000000000",
+        count: counter,
       };
 
-      const total = parseInt(count) * parseFloat(price);
+      const total = parseInt(counter) * parseFloat(price);
       // const totalFixed = parseFloat(total.toFixed(4));
       // const valueEth = web3.utils.toWei(`${totalFixed}`, 'ether');
 
       await myContract.methods
         .mint(mintParams.proof, mintParams.leaf, parseInt(mintParams.count))
         .send({ from: address, value: total })
-        .once('transactionHash', function (hash) {
-          setMintStatus(`userConfirmed`);
-          console.log('Transaction Hash', hash);
+        .once("transactionHash", function (hash) {
+          // setUserConfirmation(`success`);
+          // setHash(hash);
+          setMintStatus("userConfirmed");
+          console.log("Transaction Hash", hash);
         })
-        .once('receipt', function (receipt) {
-          setMintStatus(`blockchainConfirmed`);
-          console.log('Transaction Confirmed', receipt);
+        .once("receipt", function (receipt) {
+          // setBlChainConfirmation(`success`);
+          // setTimeout(() => {
+          //   setSuccess(true);
+          // }, 1000);
+          setMintStatus("blockchainConfirmed");
+          console.log("Transaction Confirmed", receipt);
         })
-        .on('error', function (error, receipt) {
-          console.log('Error', error);
-          setMintStatus(`error`);
+        .on("error", function (error, receipt) {
+          // handleError(error);
+          setMintStatus("error");
+          console.log("Error", error);
         });
     } catch (error) {}
   };
   return (
-    <>
-      {address && (
-        <div className='wallet-client'>
-          <p>Balance {userBalance} eth</p>
-          <p>Price {tokenPrice} eth</p>
-          <button disabled={!address ? true : false} onClick={handleMint}>
-            Mint
-          </button>
-          <p>
-            {mintStatus === `userConfirmed` && `User confirmed`}
-            {mintStatus === `blockchainConfirmed` && `Blockchain Confirmed`}
-            {mintStatus === `error` && `Error`}
-          </p>
+    <div id="mint_link">
+      <div className="columns">
+        <div className="column">
+          <p className="main_text"> Im not scared to <del>die</del> mint, and you?</p>
         </div>
-      )}
-      {!address && (
-        <div className='wallet-client'>
-          <p>CONNECT WALLET</p>
+        <div className="column">
+          <div className="wallet-client">
+            <p className="secondary_text">Dare yourself!</p>
+            <div className="button_container">
+              <button onClick={handleDecrement}>-</button>
+              <span>{counter}</span>
+              <button onClick={handleIncrement}>+</button>
+            </div>
+            {/* <p>Balance {userBalance} eth</p> */}
+            <p className="text_total">Total price</p>
+            <div class="line"></div>
+            <p className="text_price">{total} eth</p>
+
+            <button className="button_mint" disabled={!address ? true : false} onClick={handleMint}>
+              Mint
+            </button>
+            <br/>{message}
+          </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
 export default Mint;
+
+

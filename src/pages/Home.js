@@ -1,17 +1,21 @@
-import React from 'react';
+import React from "react";
+import NavBar from '../components/NavBar/NavBar' ;
+import Hero  from "../components/Hero/Hero";
+// import Collection from "../components/Collection/Collection";
+import About from "../components/About/About";
 import Mint from '../components/Mint/Mint';
-import WalletClient from '../components/WalletClient/WalletClient';
+// import Faq from '../components/Faq/Faq' ;
 
 const Home = () => {
   return (
     <>
-      <div className='homeContainer'>
-        <h1>Minimal Mint hola</h1>
-        <div className='modulesContainer'>
-          <WalletClient />
-          <Mint />
-        </div>
-      </div>
+      <NavBar/>
+      <Hero />
+      {/* <Collection /> */}
+      <Mint />
+      <About />
+      {/* <Faq /> */}
+      
     </>
   );
 };

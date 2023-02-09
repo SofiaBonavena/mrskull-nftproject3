@@ -1,0 +1,19 @@
+.footer_container {
+    width: 100%;
+    height: 150px;
+    height: 10em;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer_text {
+    color: rgb(145, 145, 145);
+    font-family: montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 0;
+    
+}

@@ -3,14 +3,15 @@ import {
   useAddress,
   useOnboard,
   useWallet,
+  useBalance,
 } from "../../contexts/OnboardContext";
 import { truncateWeb3Address } from "../../services/onboard/helpers";
-import WalletButton from "../WalletButton/WalletButton";
 
 const WalletClient = () => {
   const onboard = useOnboard();
   const wallet = useWallet();
   const address = useAddress();
+  const balance = useBalance();
 
   return onboard ? (
     <div className="wallet-client">
@@ -33,10 +34,10 @@ const WalletClient = () => {
             ) : (
               <p>Please connect your {wallet.name} wallet to use the app.</p>
             )}
+            <p>{balance}</p>
           </div>
         </div>
       )}
-      <WalletButton />
     </div>
   ) : (
     <div>Loading...</div>

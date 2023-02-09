@@ -1,0 +1,46 @@
+
+.navbar {
+    width: 100%;
+    height: 7%;
+    top: 0;
+    position: fixed;
+    background-color: rgba(22, 51, 40, 0.5);
+    box-shadow: 0 -8px 10px 1px #f5f5f5;
+    
+}
+.navbar-menu {
+    background-color: rgba(22, 51, 40, 0.5);
+}
+
+.navbar-burger {
+    color: white;
+}
+
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+    background-color: transparent;
+    color: #48c753;
+
+}
+
+.navbar-brand {
+    padding-left: 5%;
+}
+
+.navbar-end {
+    padding-right: 10%;
+}
+
+.navbar-item {
+    color: white;
+    font-family: montserrat;
+    font-weight: 400;
+}
+
+.a {
+    color: #48c753;
+    cursor: pointer;
+    text-decoration: none;
+}
+.navbar-burger {
+    margin-left: 1%;
+}
