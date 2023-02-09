@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <div className='homeContainer'>
-        <h1>Minimal Mint</h1>
+        <h1>Minimal Mint hola</h1>
         <div className='modulesContainer'>
           <WalletClient />
           <Mint />
