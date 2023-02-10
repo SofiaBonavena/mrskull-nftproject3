@@ -21,6 +21,10 @@
     "test": "jest",
     "eject": "react-scripts eject"
   },
+
+  "presets": ["@babel/preset-react"], 
+  
+  
   "eslintConfig": {
     "extends": [
       "react-app",
