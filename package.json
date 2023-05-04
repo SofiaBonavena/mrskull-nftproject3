@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "babel src -d build",
+    "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
   },
