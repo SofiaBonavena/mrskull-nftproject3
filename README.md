@@ -15,10 +15,10 @@ https://goerli.etherscan.io/address/0xc20e5bf7f9b7c3A29B291FA080004E02758cfCCC#c
 - Server: Vercel, Ethereum, Solidity
 
 ## GitHub
-:paperclip:[Link](https://github.com/SofiaBonavena/mrskull-nft)
+:paperclip:[Link](https://github.com/SofiaBonavena/mrskull-nftproject3)
 
 ## Vercel
-:paperclip:[Link](https://mrskull-nft.vercel.app/)
+:paperclip:[Link](https://mrskull-nftproject3.vercel.app/)
 
 
 
