@@ -1,6 +1,6 @@
 .hero.is-info {
     width: 100%;
-    background-image: url('/src/assets/hero2.jpg'); background-position: center;
+    background-image: url('/src/assets/hero.jpg'); background-position: center;
     background-color: #ffffff00;
     height: 100vh;
     background-size: cover;
