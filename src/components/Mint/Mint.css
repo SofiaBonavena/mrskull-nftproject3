@@ -18,7 +18,7 @@
 }
 
 .main_text {
-    font-family: 'Pirata One';
+    font-family: 'PirataOne';
     font-size: 100px;
 }
 
@@ -26,7 +26,7 @@
 
 @media only screen and (max-width: 768px) {
     .main_text {
-        font-family: 'Pirata One';
+        font-family: 'PirataOne';
         font-size: 40px;
         width: 60%;
     }
@@ -38,7 +38,7 @@
 
 @media only screen and (min-width: 769px) {
     .main_text {
-        font-family: 'Pirata One';
+        font-family: 'PirataOne';
         font-size: 50px;
         margin-right: 20%;
     }
@@ -50,7 +50,7 @@
 
 @media only screen and (min-width: 1200px) {
     .main_text {
-        font-family: 'Pirata One';
+        font-family: 'PirataOne';
         font-size: 70px;
         margin-right: 20%;
     }
@@ -64,7 +64,7 @@
 }
 
 .secondary_text {
-    font-family: 'Pirata One';
+    font-family: 'PirataOne';
     font-size: 30px;
 }
 
